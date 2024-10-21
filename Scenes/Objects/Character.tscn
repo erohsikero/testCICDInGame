@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://cav6x5jkkvacs"]
+
+[ext_resource type="Script" path="res://Scripts/Player_Controller.gd" id="1_mdvog"]
+[ext_resource type="Texture2D" uid="uid://bssglp02pc5yy" path="res://Resources/Sprites/Player/WizardTest.png" id="2_j241o"]
+[ext_resource type="Script" path="res://Scripts/Player_Camera_Controller.gd" id="3_i8mry"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dcbn6"]
+radius = 16.0
+height = 56.0
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_mdvog")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_j241o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_dcbn6")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+editor_draw_limits = true
+script = ExtResource("3_i8mry")
