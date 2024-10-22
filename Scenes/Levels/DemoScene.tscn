@@ -1,30 +1,30 @@
 [gd_scene load_steps=8 format=3 uid="uid://bk42j1j3o4pct"]
 
-[ext_resource type="Script" path="res://Scripts/Demo_Level_Controller.gd" id="1_q77sp"]
+[ext_resource type="Script" path="res://Scripts/Levels/demo_scene.gd" id="1_pvb4b"]
 [ext_resource type="PackedScene" uid="uid://cbepccfer7xkg" path="res://Scenes/Objects/Platforms And Ground/Grass_Ground.tscn" id="2_sgqnj"]
 [ext_resource type="PackedScene" uid="uid://cav6x5jkkvacs" path="res://Scenes/Objects/Character.tscn" id="3_dm1pj"]
 [ext_resource type="PackedScene" uid="uid://cx3h60houwamb" path="res://Scenes/Objects/Platforms And Ground/Dirt_Ground.tscn" id="3_o7hpa"]
-[ext_resource type="PackedScene" uid="uid://c5pqw0kpu5l4n" path="res://Scenes/Objects/Red_Portal.tscn" id="5_tivxt"]
-[ext_resource type="PackedScene" uid="uid://gc50v3b5j1o4" path="res://Scenes/Objects/Blue_Portal.tscn" id="6_hf74d"]
+[ext_resource type="PackedScene" uid="uid://gc50v3b5j1o4" path="res://Scenes/Objects/Blue_Portal.tscn" id="5_2i236"]
+[ext_resource type="PackedScene" uid="uid://c5pqw0kpu5l4n" path="res://Scenes/Objects/Red_Portal.tscn" id="6_dwqgs"]
 
 [sub_resource type="RectangleShape2D" id="3"]
 size = Vector2(64, 608)
 
 [node name="Starting Room" type="Node2D"]
 position = Vector2(-2, 21)
-script = ExtResource("1_q77sp")
+script = ExtResource("1_pvb4b")
 
-[node name="Area2D" parent="." instance=ExtResource("6_hf74d")]
-position = Vector2(711, 491)
+[node name="Area2D" parent="." instance=ExtResource("5_2i236")]
+position = Vector2(772, 486)
 
-[node name="Area2D2" parent="." instance=ExtResource("5_tivxt")]
-position = Vector2(299, 467)
+[node name="Area2D2" parent="." instance=ExtResource("6_dwqgs")]
+position = Vector2(219, 472)
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
-position = Vector2(518, 400)
+position = Vector2(518, 387)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
-position = Vector2(-558, -62)
+position = Vector2(-552, -64)
 shape = SubResource("3")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D3"]
@@ -38,10 +38,7 @@ position = Vector2(0, 526)
 position = Vector2(1152, 526)
 
 [node name="player" parent="." instance=ExtResource("3_dm1pj")]
-position = Vector2(496, 436)
-
-[node name="GrassGround3" parent="." instance=ExtResource("3_o7hpa")]
-position = Vector2(869, 349)
+position = Vector2(448, 388)
 
 [connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]
 [connection signal="body_entered" from="Area2D2" to="Area2D2" method="_on_body_entered"]
