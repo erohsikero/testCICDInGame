@@ -129,6 +129,9 @@ var acc = Vector2()
 @onready var coyote_timer = Timer.new()
 @onready var jump_buffer_timer = Timer.new()
 
+@onready var idle : AnimatedSprite2D = $Idle_anim
+@onready var walk : AnimatedSprite2D = $Walk_anim
+var walkLeft : bool = false
 
 func _init():
 	default_gravity = calculate_gravity(max_jump_height, jump_duration)
@@ -137,8 +140,8 @@ func _init():
 	release_gravity_multiplier = calculate_release_gravity_multiplier(
 			jump_velocity, min_jump_height, default_gravity)
 	
+
 func _ready():
-	
 	self.add_to_group("player")  # Add the character to the "player" group used for detecting object type when colliding with portal
 	
 	if is_coyote_time_enabled:
@@ -150,7 +153,9 @@ func _ready():
 		add_child(jump_buffer_timer)
 		jump_buffer_timer.wait_time = jump_buffer
 		jump_buffer_timer.one_shot = true
-		
+	
+	idle.play()
+	walk.play()
 
 
 func _input(_event):
@@ -199,6 +204,7 @@ func _physics_process(delta):
 	velocity.x *= 1 / (1 + (delta * friction))
 	velocity += acc * delta
 	
+	determine_animation(velocity)
 	
 	_was_on_ground = is_feet_on_ground()
 	move_and_slide()
@@ -340,8 +346,23 @@ func calculate_friction(time_to_max):
 ## Formula from [url]https://www.reddit.com/r/gamedev/comments/bdbery/comment/ekxw9g4/?utm_source=share&utm_medium=web2x&context=3[/url]
 func calculate_speed(p_max_speed, p_friction):
 	return (p_max_speed / p_friction) - p_max_speed
-	
-	
+
+var velThresh : int = 30
+
+func determine_animation(velocity):
+	idle.visible = false
+	walk.visible = false
+	# Checks if velocity is below threshhold
+	if (-velThresh <= velocity.x and velocity.x <= velThresh):
+		idle.visible = true
+	elif (velocity.x > velThresh):
+		walkLeft = false
+		walk.visible = true
+	elif (velocity.x < -velThresh):
+		walkLeft = true
+		walk.visible = true
+	walk.flip_h = walkLeft
+
 func Set_Clamp(Max_X, Max_Y):
 	var Camera_Instance = $Camera2D
 	
