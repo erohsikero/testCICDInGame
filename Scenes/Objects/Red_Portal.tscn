@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5pqw0kpu5l4n"]
+
+[ext_resource type="Texture2D" uid="uid://2fbrl3rqjgim" path="res://Resources/Sprites/Objects/redportal.png" id="1_pbivy"]
+
+[node name="Area2D" type="Area2D"]
+position = Vector2(0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, -1)
+texture = ExtResource("1_pbivy")

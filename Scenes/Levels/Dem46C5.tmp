@@ -14,7 +14,7 @@ position = Vector2(-2, 21)
 script = ExtResource("1_q77sp")
 
 [node name="Area2D" parent="." instance=ExtResource("6_hf74d")]
-position = Vector2(711, 491)
+position = Vector2(683, 475)
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
 position = Vector2(518, 400)
@@ -35,8 +35,3 @@ position = Vector2(1152, 526)
 
 [node name="player" parent="." instance=ExtResource("3_dm1pj")]
 position = Vector2(496, 436)
-
-[node name="GrassGround3" parent="." instance=ExtResource("3_o7hpa")]
-position = Vector2(869, 349)
-
-[connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]

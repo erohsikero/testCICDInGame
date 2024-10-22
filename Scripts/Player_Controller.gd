@@ -129,6 +129,9 @@ func _init():
 			jump_velocity, min_jump_height, default_gravity)
 	
 func _ready():
+	
+	self.add_to_group("player")  # Add the character to the "player" group used for detecting object type when colliding with portal
+	
 	if is_coyote_time_enabled:
 		add_child(coyote_timer)
 		coyote_timer.wait_time = coyote_time
@@ -138,6 +141,7 @@ func _ready():
 		add_child(jump_buffer_timer)
 		jump_buffer_timer.wait_time = jump_buffer
 		jump_buffer_timer.one_shot = true
+		
 
 
 func _input(_event):
@@ -171,6 +175,7 @@ func _physics_process(delta):
 			jump()
 		
 		hit_ground.emit()
+		move_and_slide()
 	
 	
 	# Cannot do this in _input because it needs to be checked every frame
@@ -333,4 +338,3 @@ func Set_Clamp(Max_X, Max_Y):
 	
 	Camera_Instance.Set_Clamp(Max_X, Max_Y)
 	pass
-
