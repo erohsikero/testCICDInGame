@@ -13,14 +13,14 @@ position = Vector2(-2, 21)
 script = ExtResource("1_pvb4b")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
-position = Vector2(520, 360)
+position = Vector2(518, 387)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
 position = Vector2(-552, -64)
 shape = SubResource("3")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D3"]
-position = Vector2(2206, -53)
+position = Vector2(1816, -38)
 shape = SubResource("3")
 
 [node name="GrassGround" parent="." instance=ExtResource("2_sgqnj")]
