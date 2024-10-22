@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqro2d6fo7g2x"]
+
+[ext_resource type="Script" path="res://Scripts/fireball_Controller.gd" id="1_djiwp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_usjpc"]
+radius = 13.0384
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_sj6pa"]
+
+[node name="Fireball" type="Area2D" groups=["fireball"]]
+script = ExtResource("1_djiwp")
+
+[node name="Fireball_Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_usjpc")
+debug_color = Color(0.990367, 0, 0.279212, 0.42)
+
+[node name="Fireball_Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, 3.8147e-06)
+scale = Vector2(24, 25)
+texture = SubResource("PlaceholderTexture2D_sj6pa")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
