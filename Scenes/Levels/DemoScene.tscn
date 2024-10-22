@@ -1,7 +1,7 @@
 [gd_scene load_steps=21 format=3 uid="uid://bk42j1j3o4pct"]
 
 [ext_resource type="Script" path="res://Scripts/Levels/demo_scene.gd" id="1_pvb4b"]
-[ext_resource type="PackedScene" uid="uid://cbepccfer7xkg" path="res://Scenes/Objects/Grass_Ground.tscn" id="2_sgqnj"]
+[ext_resource type="PackedScene" uid="uid://cbepccfer7xkg" path="res://Scenes/Objects/Platforms And Ground/Grass_Ground.tscn" id="2_sgqnj"]
 [ext_resource type="PackedScene" uid="uid://cav6x5jkkvacs" path="res://Scenes/Objects/Character.tscn" id="3_dm1pj"]
 [ext_resource type="PackedScene" uid="uid://cx3h60houwamb" path="res://Scenes/Objects/Dirt_Ground.tscn" id="3_o7hpa"]
 [ext_resource type="Texture2D" uid="uid://cy2avi84nts5x" path="res://Resources/Backgrounds/background_1.png" id="3_yak5o"]
@@ -231,3 +231,7 @@ position = Vector2(1152, 443)
 
 [node name="player" parent="." instance=ExtResource("3_dm1pj")]
 position = Vector2(448, 388)
+
+[connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]
+[connection signal="body_entered" from="Area2D2" to="Area2D2" method="_on_body_entered"]
+[connection signal="body_exited" from="Area2D2" to="Area2D2" method="_on_body_exited"]

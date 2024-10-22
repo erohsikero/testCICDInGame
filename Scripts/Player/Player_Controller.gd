@@ -20,6 +20,15 @@ const DEFAULT_MIN_JUMP_HEIGHT = 60
 const DEFAULT_DOUBLE_JUMP_HEIGHT = 100
 const DEFAULT_JUMP_DURATION = 0.3
 
+#Reputation
+@export var reputation: int = 0: 
+	get:
+		return reputation
+	set(value):
+		print("Setting reputation to: ", value)
+		reputation = value
+		
+
 var _max_jump_height: float = DEFAULT_MAX_JUMP_HEIGHT
 ## The max jump height in pixels (holding jump).
 @export var max_jump_height: float = DEFAULT_MAX_JUMP_HEIGHT: 
@@ -129,6 +138,9 @@ func _init():
 			jump_velocity, min_jump_height, default_gravity)
 	
 func _ready():
+	
+	self.add_to_group("player")  # Add the character to the "player" group used for detecting object type when colliding with portal
+	
 	if is_coyote_time_enabled:
 		add_child(coyote_timer)
 		coyote_timer.wait_time = coyote_time
@@ -138,6 +150,7 @@ func _ready():
 		add_child(jump_buffer_timer)
 		jump_buffer_timer.wait_time = jump_buffer
 		jump_buffer_timer.one_shot = true
+		
 
 
 func _input(_event):
@@ -171,6 +184,7 @@ func _physics_process(delta):
 			jump()
 		
 		hit_ground.emit()
+		move_and_slide()
 	
 	
 	# Cannot do this in _input because it needs to be checked every frame
