@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://cav6x5jkkvacs"]
 
-[ext_resource type="Script" path="res://Scripts/Player_Controller.gd" id="1_mdvog"]
+[ext_resource type="Script" path="res://Scripts/Player/Player_Controller.gd" id="1_mdvog"]
 [ext_resource type="Texture2D" uid="uid://bssglp02pc5yy" path="res://Resources/Sprites/Player/WizardTest.png" id="2_j241o"]
-[ext_resource type="Script" path="res://Scripts/Player_Camera_Controller.gd" id="3_i8mry"]
+[ext_resource type="Script" path="res://Scripts/Player/Player_Camera_Controller.gd" id="3_i8mry"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dcbn6"]
 radius = 16.0

@@ -1,0 +1,88 @@
+[gd_scene load_steps=8 format=3 uid="uid://cbfnh4fuk8caq"]
+
+[ext_resource type="Script" path="res://Scripts/Menus/path_selection_script.gd" id="1_cp17r"]
+[ext_resource type="Texture2D" uid="uid://ih0uq1ni06c2" path="res://Resources/Sprites/Player/WizardChoice.png" id="2_ekkqb"]
+[ext_resource type="Texture2D" uid="uid://byucyw7dbic3m" path="res://Resources/MenuTextItems/ChooseWisely.png" id="3_8lh5w"]
+[ext_resource type="Texture2D" uid="uid://cbelnovi51bfc" path="res://Resources/MenuTextItems/Choice_Good.png" id="4_kunff"]
+[ext_resource type="Script" path="res://Scripts/Menus/button_good.gd" id="5_676w1"]
+[ext_resource type="Texture2D" uid="uid://pboq1m5jg8yi" path="res://Resources/MenuTextItems/Choice_Evil.png" id="6_idmeg"]
+[ext_resource type="Script" path="res://Scripts/Menus/button_evil.gd" id="7_op5mh"]
+
+[node name="Path_Selection" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cp17r")
+
+[node name="Wizard" type="Sprite2D" parent="."]
+top_level = true
+texture_filter = 3
+texture_repeat = 1
+position = Vector2(576, 392)
+scale = Vector2(8, 8)
+texture = ExtResource("2_ekkqb")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 1)
+
+[node name="Choose_Wisely" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 227.0
+offset_top = 40.0
+offset_right = 925.0
+offset_bottom = 110.0
+texture = ExtResource("3_8lh5w")
+
+[node name="Button_Good" type="Button" parent="."]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = 180.0
+offset_top = 260.0
+offset_right = 391.0
+offset_bottom = 338.0
+mouse_default_cursor_shape = 2
+icon = ExtResource("4_kunff")
+flat = true
+script = ExtResource("5_676w1")
+
+[node name="Button_Good_Image" type="TextureRect" parent="Button_Good"]
+light_mask = 0
+layout_mode = 0
+offset_left = 74.0
+offset_top = 77.0
+offset_right = 138.0
+offset_bottom = 141.0
+texture = ExtResource("2_ekkqb")
+
+[node name="Button_Evil" type="Button" parent="."]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = 761.0
+offset_top = 260.0
+offset_right = 972.0
+offset_bottom = 338.0
+mouse_default_cursor_shape = 2
+icon = ExtResource("6_idmeg")
+flat = true
+script = ExtResource("7_op5mh")
+
+[node name="Button_Evil_Image" type="TextureRect" parent="Button_Evil"]
+light_mask = 0
+layout_mode = 0
+offset_left = 77.0
+offset_top = 81.0
+offset_right = 141.0
+offset_bottom = 145.0
+texture = ExtResource("2_ekkqb")
+
+[connection signal="pressed" from="Button_Good" to="Button_Good" method="_on_pressed"]
+[connection signal="pressed" from="Button_Evil" to="Button_Evil" method="_on_pressed"]
