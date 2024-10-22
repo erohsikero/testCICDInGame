@@ -19,9 +19,4 @@ texture = ExtResource("1_nrdvu")
 position = Vector2(-77, -11)
 shape = SubResource("CapsuleShape2D_hbij3")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(24, 5)
-scale = Vector2(19.945, 19.945)
-constant_linear_velocity = Vector2(100, 100)
-
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

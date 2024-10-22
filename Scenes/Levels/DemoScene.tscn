@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bk42j1j3o4pct"]
+[gd_scene load_steps=8 format=3 uid="uid://bk42j1j3o4pct"]
 
 [ext_resource type="Script" path="res://Scripts/Demo_Level_Controller.gd" id="1_q77sp"]
 [ext_resource type="PackedScene" uid="uid://cbepccfer7xkg" path="res://Scenes/Objects/Platforms And Ground/Grass_Ground.tscn" id="2_sgqnj"]
 [ext_resource type="PackedScene" uid="uid://cav6x5jkkvacs" path="res://Scenes/Objects/Character.tscn" id="3_dm1pj"]
 [ext_resource type="PackedScene" uid="uid://cx3h60houwamb" path="res://Scenes/Objects/Platforms And Ground/Dirt_Ground.tscn" id="3_o7hpa"]
+[ext_resource type="PackedScene" uid="uid://c5pqw0kpu5l4n" path="res://Scenes/Objects/Red_Portal.tscn" id="5_tivxt"]
 [ext_resource type="PackedScene" uid="uid://gc50v3b5j1o4" path="res://Scenes/Objects/Blue_Portal.tscn" id="6_hf74d"]
 
 [sub_resource type="RectangleShape2D" id="3"]
@@ -15,6 +16,9 @@ script = ExtResource("1_q77sp")
 
 [node name="Area2D" parent="." instance=ExtResource("6_hf74d")]
 position = Vector2(711, 491)
+
+[node name="Area2D2" parent="." instance=ExtResource("5_tivxt")]
+position = Vector2(299, 467)
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
 position = Vector2(518, 400)
@@ -40,3 +44,5 @@ position = Vector2(496, 436)
 position = Vector2(869, 349)
 
 [connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]
+[connection signal="body_entered" from="Area2D2" to="Area2D2" method="_on_body_entered"]
+[connection signal="body_exited" from="Area2D2" to="Area2D2" method="_on_body_exited"]

@@ -21,7 +21,7 @@ func _next_scene() -> void:
 		scene_change_triggered = true  # Set the flag to prevent further calls
 		
 		# Access global variable
-		Global.reputation += 1
+		Global.reputation -= 1
 
 		print("PLAYER REPUTATION UPDATED:", Global.reputation) 
 		get_tree().change_scene_to_file(target_scene)

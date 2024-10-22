@@ -20,6 +20,15 @@ const DEFAULT_MIN_JUMP_HEIGHT = 60
 const DEFAULT_DOUBLE_JUMP_HEIGHT = 100
 const DEFAULT_JUMP_DURATION = 0.3
 
+#Reputation
+@export var reputation: int = 0: 
+	get:
+		return reputation
+	set(value):
+		print("Setting reputation to: ", value)
+		reputation = value
+		
+
 var _max_jump_height: float = DEFAULT_MAX_JUMP_HEIGHT
 ## The max jump height in pixels (holding jump).
 @export var max_jump_height: float = DEFAULT_MAX_JUMP_HEIGHT: 
