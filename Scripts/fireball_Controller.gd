@@ -1,6 +1,10 @@
 extends Area2D
 
 const FIREBALL_DEFAULT_SPEED = 400
+const LEFT_FACING = 90
+const RIGHT_FACING = 270
+
+@onready var animations = $Fireball_Animation
 
 @export var speed: int = FIREBALL_DEFAULT_SPEED:
 	get:
@@ -11,14 +15,19 @@ const FIREBALL_DEFAULT_SPEED = 400
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float):
 	
 	## Changes the fireballs position each frame
 	position = position + (transform.x * speed * delta)
+	animations.play("fireball_animation")
+	
+	if (speed<0):
+		$Fireball_Sprite.rotation_degrees = LEFT_FACING
+	else:
+		$Fireball_Sprite.rotation_degrees = RIGHT_FACING
 
 ## calle when the fireball collides with an object
 func _on_body_entered(body: Node2D):
