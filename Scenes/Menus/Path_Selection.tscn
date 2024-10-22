@@ -1,8 +1,8 @@
-[gd_scene load_steps=25 format=3 uid="uid://cbfnh4fuk8caq"]
+[gd_scene load_steps=30 format=3 uid="uid://cbfnh4fuk8caq"]
 
 [ext_resource type="Script" path="res://Scripts/Menus/path_selection_script.gd" id="1_cp17r"]
-[ext_resource type="Texture2D" uid="uid://ih0uq1ni06c2" path="res://Resources/Sprites/Player/WizardChoice.png" id="2_ekkqb"]
 [ext_resource type="Texture2D" uid="uid://byucyw7dbic3m" path="res://Resources/MenuTextItems/ChooseWisely.png" id="3_8lh5w"]
+[ext_resource type="Texture2D" uid="uid://e66igbvymr8v" path="res://Resources/MenuTextItems/Wizard_Decision_Sheet.png" id="3_xmwjd"]
 [ext_resource type="Texture2D" uid="uid://cbelnovi51bfc" path="res://Resources/MenuTextItems/Choice_Good.png" id="4_kunff"]
 [ext_resource type="Script" path="res://Scripts/Menus/button_good.gd" id="5_676w1"]
 [ext_resource type="Texture2D" uid="uid://pboq1m5jg8yi" path="res://Resources/MenuTextItems/Choice_Evil.png" id="6_idmeg"]
@@ -10,6 +10,42 @@
 [ext_resource type="Script" path="res://Scripts/Menus/button_evil.gd" id="7_op5mh"]
 [ext_resource type="Texture2D" uid="uid://duxblr2bbpo0s" path="res://Resources/MenuTextItems/Castle_Background.png" id="9_0kf4t"]
 [ext_resource type="Texture2D" uid="uid://ctu6rn3wbe74o" path="res://Resources/MenuTextItems/fire_main.png" id="10_q83d7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qi4ku"]
+atlas = ExtResource("3_xmwjd")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bnk4a"]
+atlas = ExtResource("3_xmwjd")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lt6ig"]
+atlas = ExtResource("3_xmwjd")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jjeld"]
+atlas = ExtResource("3_xmwjd")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2oi86"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qi4ku")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bnk4a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lt6ig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jjeld")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d2map"]
 atlas = ExtResource("7_nk448")
@@ -127,14 +163,12 @@ offset_right = 1152.0
 offset_bottom = 648.0
 texture = ExtResource("9_0kf4t")
 
-[node name="Wizard" type="Sprite2D" parent="."]
-top_level = true
-z_index = 2
-texture_filter = 3
-texture_repeat = 1
+[node name="Wizard" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 position = Vector2(576, 392)
 scale = Vector2(8, 8)
-texture = ExtResource("2_ekkqb")
+sprite_frames = SubResource("SpriteFrames_2oi86")
+frame_progress = 0.239378
 
 [node name="Choose_Wisely" type="TextureRect" parent="."]
 z_index = 1
