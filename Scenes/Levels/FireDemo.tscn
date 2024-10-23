@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d0au5k8houk8p"]
+[gd_scene load_steps=10 format=3 uid="uid://d0au5k8houk8p"]
 
 [ext_resource type="Script" path="res://Scripts/Fire_Demo_Level_Controller.gd" id="1_pjcjn"]
 [ext_resource type="PackedScene" uid="uid://cx3h60houwamb" path="res://Scenes/Objects/Dirt_Ground.tscn" id="1_pvpe6"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cqro2d6fo7g2x" path="res://Scenes/Objects/fireball.tscn" id="5_2rf3y"]
 [ext_resource type="PackedScene" uid="uid://c5kdkn67gd2w6" path="res://Scenes/Objects/burnable.tscn" id="6_xhyo6"]
 [ext_resource type="PackedScene" uid="uid://by70h5v81dqg5" path="res://Scenes/Objects/Ignitable.tscn" id="7_0m2ri"]
+[ext_resource type="PackedScene" uid="uid://c2qva6six3ws4" path="res://Scenes/Objects/Dialog_Area.tscn" id="8_7ji8p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ur0vy"]
 size = Vector2(20, 576)
@@ -60,3 +61,6 @@ position = Vector2(2106, -247)
 
 [node name="player" parent="." instance=ExtResource("3_wiebk")]
 position = Vector2(504, -131)
+
+[node name="DialogArea" parent="." instance=ExtResource("8_7ji8p")]
+position = Vector2(401, -133)

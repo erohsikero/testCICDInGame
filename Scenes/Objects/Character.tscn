@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cav6x5jkkvacs"]
+[gd_scene load_steps=11 format=3 uid="uid://cav6x5jkkvacs"]
 
 [ext_resource type="Script" path="res://Scripts/Player_Controller.gd" id="1_mdvog"]
 [ext_resource type="Texture2D" uid="uid://bssglp02pc5yy" path="res://Resources/Sprites/Player/WizardTest.png" id="2_j241o"]
@@ -29,6 +29,9 @@ _data = {
 "move_right": SubResource("Animation_myl21")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4s41e"]
+size = Vector2(72, 95)
+
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_mdvog")
 
@@ -56,5 +59,12 @@ libraries = {
 [node name="Fireball_Timer" type="Timer" parent="."]
 process_callback = 0
 wait_time = 0.7
+
+[node name="Dialog_Interaction_Area" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dialog_Interaction_Area"]
+shape = SubResource("RectangleShape2D_4s41e")
 
 [connection signal="timeout" from="Fireball_Timer" to="." method="_on_fireball_timer_timeout"]
