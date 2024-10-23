@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://yov0lv2obu0"
-path="res://.godot/imported/blueportal.png-3c8048c6b22a59146566f5f02f9ea76f.ctex"
+path="res://.godot/imported/Blue_Portal_Placeholder.png-8e8122f62fa453a477f6d10b7869e636.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Sprites/Objects/blueportal.png"
-dest_files=["res://.godot/imported/blueportal.png-3c8048c6b22a59146566f5f02f9ea76f.ctex"]
+source_file="res://Resources/Sprites/Objects/Blue_Portal_Placeholder.png"
+dest_files=["res://.godot/imported/Blue_Portal_Placeholder.png-8e8122f62fa453a477f6d10b7869e636.ctex"]
 
 [params]
 

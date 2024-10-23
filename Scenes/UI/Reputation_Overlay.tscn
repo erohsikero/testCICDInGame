@@ -1,10 +1,15 @@
-[gd_scene format=3 uid="uid://pdxghtua0e5h"]
+[gd_scene load_steps=3 format=3 uid="uid://me4ujylfat4x"]
+
+[ext_resource type="Script" path="res://Scripts/UI/Reputation_Overlay.gd" id="1_31x52"]
+[ext_resource type="FontFile" uid="uid://cit6gwe5px1q8" path="res://Resources/Fonts/Xolonium-Regular.ttf" id="1_x3nde"]
 
 [node name="ReputationOverlay" type="Node2D"]
+script = ExtResource("1_31x52")
 
 [node name="ReputationLabel" type="RichTextLabel" parent="."]
 offset_right = 162.0
 offset_bottom = 74.0
+theme_override_fonts/normal_font = ExtResource("1_x3nde")
 bbcode_enabled = true
 text = "[center]Tiny Wizard
  <Very Evil> [center]"
