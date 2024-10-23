@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2fbrl3rqjgim"
-path="res://.godot/imported/redportal.png-833774fd78e02546b9d16c6bc8e72bad.ctex"
+uid="uid://d05jup8x6rgek"
+path="res://.godot/imported/Key_Fragment_Placeholder.png-7f266938d89efd2f8fe28eb1ba231612.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Sprites/Objects/redportal.png"
-dest_files=["res://.godot/imported/redportal.png-833774fd78e02546b9d16c6bc8e72bad.ctex"]
+source_file="res://Resources/Sprites/Objects/Key_Fragment_Placeholder.png"
+dest_files=["res://.godot/imported/Key_Fragment_Placeholder.png-7f266938d89efd2f8fe28eb1ba231612.ctex"]
 
 [params]
 
