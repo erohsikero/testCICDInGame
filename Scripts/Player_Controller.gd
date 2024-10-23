@@ -114,6 +114,7 @@ var release_gravity_multiplier : float
 
 var jumps_left : int
 var holding_jump := false
+var stop_inputs = false
 
 
 enum JumpType {NONE, GROUND, AIR}
@@ -150,37 +151,41 @@ func _ready():
 		add_child(jump_buffer_timer)
 		jump_buffer_timer.wait_time = jump_buffer
 		jump_buffer_timer.one_shot = true
+		
+	Dialogic.signal_event.connect(_on_dialogic_signal)
 
 
 func _input(_event):
 	
 	acc.x = 0
 	
-	if (Input.is_action_pressed(input_right) && Input.is_action_pressed(input_left)):
-		pass
-		
-	elif (Input.is_action_pressed(input_right) && !(animations.current_animation=="cast_fireball_right")):
-		acc.x = max_acceleration
-		direction = "right"
-		animations.play("move_right")
-		
-	elif (Input.is_action_pressed(input_left) && !(animations.current_animation=="cast_fireball_right")):
-		acc.x = -max_acceleration
-		direction = "left"
-		animations.play("move_left")
+	if (!stop_inputs):
 	
-	if (Input.is_action_just_pressed(input_jump) && !(animations.current_animation=="cast_fireball_right")):
-		holding_jump = true
-		start_jump_buffer_timer()
-		if (not can_hold_jump and can_ground_jump()) or can_double_jump():
-			jump()
+		if (Input.is_action_pressed(input_right) && Input.is_action_pressed(input_left)):
+			pass
+			
+		elif (Input.is_action_pressed(input_right) && !(animations.current_animation=="cast_fireball_right")):
+			acc.x = max_acceleration
+			direction = "right"
+			animations.play("move_right")
+			
+		elif (Input.is_action_pressed(input_left) && !(animations.current_animation=="cast_fireball_right")):
+			acc.x = -max_acceleration
+			direction = "left"
+			animations.play("move_left")
 		
-	if Input.is_action_just_released(input_jump):
-		holding_jump = false
-		
-	if Input.is_action_just_pressed(input_fireball):
-		if (is_on_floor()):
-			Cast_Fireball()
+		if (Input.is_action_just_pressed(input_jump) && !(animations.current_animation=="cast_fireball_right")):
+			holding_jump = true
+			start_jump_buffer_timer()
+			if (not can_hold_jump and can_ground_jump()) or can_double_jump():
+				jump()
+			
+		if Input.is_action_just_released(input_jump):
+			holding_jump = false
+			
+		if Input.is_action_just_pressed(input_fireball):
+			if (is_on_floor()):
+				Cast_Fireball()
 
 
 func _physics_process(delta):
@@ -385,3 +390,18 @@ func Create_Fireball():
 func _on_fireball_timer_timeout():
 	$Fireball_Timer.stop()
 	Create_Fireball()
+	
+func _on_dialogic_signal(argument: String):
+	
+	if (argument=="start_dialog"):
+		stop_inputs=true
+	elif (argument=="end_dialog"):
+		stop_inputs=false
+	
+	## Arguments for losing/gaining reputation
+	elif (argument=="bad"):
+		pass
+	elif (argument=="good"):
+		pass
+		
+		
