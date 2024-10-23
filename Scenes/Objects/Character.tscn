@@ -1,9 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://cav6x5jkkvacs"]
+[gd_scene load_steps=23 format=3 uid="uid://cav6x5jkkvacs"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player_Controller.gd" id="1_mdvog"]
 [ext_resource type="Texture2D" uid="uid://dndk8b1nl5y58" path="res://Resources/Sprites/Player/Wizard_Idle.png" id="2_bpcuy"]
 [ext_resource type="Script" path="res://Scripts/Player/Player_Camera_Controller.gd" id="3_i8mry"]
+[ext_resource type="Texture2D" uid="uid://v10jrh7k4g0e" path="res://Resources/Sprites/Player/Wizard_Cast_Sheet.png" id="3_m2km0"]
 [ext_resource type="Texture2D" uid="uid://csaw3hslv16ok" path="res://Resources/Sprites/Player/Wizard_walk.png" id="3_ybi5h"]
+[ext_resource type="PackedScene" uid="uid://me4ujylfat4x" path="res://Scenes/UI/Reputation_Overlay.tscn" id="5_gcsak"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_16w5t"]
 atlas = ExtResource("2_bpcuy")
@@ -77,26 +79,119 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_i1hhh"]
+atlas = ExtResource("3_m2km0")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_to8cl"]
+atlas = ExtResource("3_m2km0")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fbtyj"]
+atlas = ExtResource("3_m2km0")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhwx8"]
+atlas = ExtResource("3_m2km0")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y2gfk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i1hhh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_to8cl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fbtyj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhwx8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dcbn6"]
 radius = 16.0
-height = 56.0
+height = 54.0
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[sub_resource type="Animation" id="Animation_8sgmm"]
+resource_name = "cast_fireball_right"
+length = 0.7
+
+[sub_resource type="Animation" id="Animation_klf5e"]
+resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_c2lr5"]
+resource_name = "move_left"
+
+[sub_resource type="Animation" id="Animation_myl21"]
+resource_name = "move_right"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1g3tc"]
+_data = {
+"cast_fireball_right": SubResource("Animation_8sgmm"),
+"idle": SubResource("Animation_klf5e"),
+"move_left": SubResource("Animation_c2lr5"),
+"move_right": SubResource("Animation_myl21")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4s41e"]
+size = Vector2(91, 107.5)
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_mdvog")
 max_acceleration = 25000
 friction = 99
 
 [node name="Idle_anim" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_f3yfl")
-frame_progress = 0.586386
+frame_progress = 0.859257
 
 [node name="Walk_anim" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_rtpku")
-frame_progress = 0.367852
+frame_progress = 0.14003
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Cast_Fireball_anim" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_y2gfk")
+frame = 3
+frame_progress = 0.353684
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["player"]]
+position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_dcbn6")
+
+[node name="right_fireball_marker" type="Marker2D" parent="."]
+position = Vector2(26, 0)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 editor_draw_limits = true
 script = ExtResource("3_i8mry")
+
+[node name="Reputation_Overlay" parent="Camera2D" instance=ExtResource("5_gcsak")]
+position = Vector2(-80, -80)
+
+[node name="left_fireball_marker" type="Marker2D" parent="."]
+position = Vector2(-26, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1g3tc")
+}
+
+[node name="Fireball_Timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.4
+
+[node name="Dialog_Interaction_Area" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dialog_Interaction_Area"]
+shape = SubResource("RectangleShape2D_4s41e")
+
+[connection signal="timeout" from="Fireball_Timer" to="." method="_on_fireball_timer_timeout"]

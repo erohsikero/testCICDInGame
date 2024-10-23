@@ -1,116 +1,38 @@
-# PlatformerController2D
+# Little Wizard; Big Adventure
 
-A 2D platformer class for godot.
+Welcome to **Little Wizard; Big Adventure**, a 2D adventure game where you take control of a wizard who has been accidentally shrunk to a tiny size. Embark on a journey filled with magic, puzzles, and dangerous enemies as you search for a way to return to your normal size!
 
-## Changelog
+## Story
 
-### Version 2.0.2
-
-- Fixed bug where falling off a cliff would give an extra jump
-
-- Fixed bug where setting coyote_time or jump_buffer to 0 would raise an error
-
-- Added ground_jump and double_jump functions
-
-- Added separate functions for starting the jump_buffer or coyote timers and checking if they are running
-
-### Version 2.0.1
-
-- Removed the .godot and .import folders from the repository
-
-### Version 2.0
-
-- Updated to Godot 4.0
-  
-  - Removed set and get functions in favour of properties
-
-- Can now have negative jump height, which will reverse gravity
-
-- Gravity is now positive when pointing down, and negative when pointing up
-
-- Added 'jumped' and 'hit_ground' signals
-
-- Split the large `_physics_process` function into multiple functions
-
-### Version 1.0.1
-
-- Updated to Godot 3.4
-- Fixed division by zero error when changing min jump height
-- Other minor fixes
-
-## Installation
-
-1. Add platformer_controller.gd to your project
-2. Type `extends PlatformerController2D` to the top of your script
-3. Add these input mappings in your project settings (or you can change the input variables in the inspector)
-   - "move_left"
-   - "move_right"
-   - "jump"
+In a magical mishap, you, a powerful wizard, are shrunk down to the size of a mouse. Now, what used to be everyday objects and creatures have become gigantic obstacles and foes. The only way to reverse the spell is to find the ingredients for a powerful potion, scattered across dangerous lands. Along the way, you'll discover ancient secrets, meet helpful allies, and confront menacing enemies that stand between you and your goal.
 
 ## Features
 
-- Double jump
-- Coyote time
-- Jump buffer
-- Hold jump to go higher
-- Defining jump height and duration (as opposed to setting gravity and jump velocity)
-- Assymetrical jumps (falling faster than rising)
+- **Explore a vast world**: Traverse multiple environments like enchanted forests, mysterious dungeons, and towering castles, each filled with secrets to uncover.
+- **Challenging puzzles**: Use your intellect and magic to overcome obstacles, unlock doors, and navigate tricky platforms.
+- **Engage in quests**: Help NPCs and embark on side quests that shape the world around you.
+- **Dynamic soundtrack**: Enjoy a captivating score that changes as you journey through different areas of the game.
 
-| <img src="https://github.com/Ev01/PlatformerController2D/raw/assets/jumping.GIF" width="500"> | <img src="https://github.com/Ev01/PlatformerController2D/raw/assets/jump_duration.GIF" width="500"> | <img src="https://github.com/Ev01/PlatformerController2D/raw/assets/jump_height.GIF" width="500"> |
-| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+## Installation
 
-## Customization / Export variables
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/nathancecixx/LittleWizard.git
+2. Open the project in Godot.
 
-Here are the values that you can change in the inspector:
+3. Run the game from your game engine or build it for your preferred platform.
 
-### max_jump_height
+## Controls
 
-The max jump height in pixels. You reach this when you hold down jump.
+    Move: Arrow keys or WASD
+    Cast Spell: Space bar
+    Interact: E key
 
-### Min Jump Height
+## Contributing
 
-The minimum jump height (tapping jump).
+We welcome contributions! Feel free to fork the repository, create a branch, and submit a pull request.
 
-### Double Jump Height
+## License
 
-The height of your jump in the air (i.e. double jump, triple jump etc.).
-
-### Jump Duration
-
-How long it takes to get to the peak of the jump (in seconds).
-
-### Falling Gravity Multiplier
-
-Multiplies the gravity by this while falling.
-
-### Max Jump Amount
-
-How many times you can jump before hitting the ground. Set this to 2 for a double jump.
-
-### Max Acceleration
-
-How much you accelerate when you hold left or right (in pixels/sec^2).
-
-### Friction
-
-The higher this number, the more friction is on your character.
-
-### Can Hold Jump
-
-If this is off, you have to press jump down every time you land. If its on you can keep it held.
-
-### Coyote Time
-
-You can still jump this many seconds after falling off a ledge.
-
-### Jump Buffer
-
-Pressing jump this many seconds before hitting the ground will still make you jump.\
-Note: This is only needed when can_hold_jump is off.
-
-### Input Variables
-
-`input_left`\
-`input_right`\
-`input_jump`\
- Set these to the names of your actions in the Input Map
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Contact
