@@ -204,7 +204,7 @@ func _physics_process(delta):
 	velocity.x *= 1 / (1 + (delta * friction))
 	velocity += acc * delta
 	
-	determine_animation(velocity)
+	determine_animation()
 	
 	_was_on_ground = is_feet_on_ground()
 	move_and_slide()
@@ -349,7 +349,7 @@ func calculate_speed(p_max_speed, p_friction):
 
 var velThresh : int = 30
 
-func determine_animation(velocity):
+func determine_animation():
 	idle.visible = false
 	walk.visible = false
 	# Checks if velocity is below threshhold

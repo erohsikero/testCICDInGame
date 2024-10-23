@@ -1,5 +1,5 @@
 extends Area2D
-var target_scene = "res://Scenes/Levels/DemoScene.tscn" # Scene to transition to
+var target_scene = "res://Scenes/Levels/Level_Selection.tscn" # Scene to transition to
 
 var scene_change_triggered = false  # Flag to track if scene change has been triggered
 
