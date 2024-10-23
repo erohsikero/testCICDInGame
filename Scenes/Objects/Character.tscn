@@ -145,6 +145,8 @@ size = Vector2(91, 107.5)
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_mdvog")
+max_acceleration = 25000
+friction = 99
 
 [node name="Idle_anim" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_f3yfl")
