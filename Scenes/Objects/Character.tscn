@@ -81,7 +81,31 @@ animations = [{
 radius = 16.0
 height = 56.0
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[sub_resource type="Animation" id="Animation_8sgmm"]
+resource_name = "cast_fireball_right"
+length = 0.7
+
+[sub_resource type="Animation" id="Animation_klf5e"]
+resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_c2lr5"]
+resource_name = "move_left"
+
+[sub_resource type="Animation" id="Animation_myl21"]
+resource_name = "move_right"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1g3tc"]
+_data = {
+"cast_fireball_right": SubResource("Animation_8sgmm"),
+"idle": SubResource("Animation_klf5e"),
+"move_left": SubResource("Animation_c2lr5"),
+"move_right": SubResource("Animation_myl21")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4s41e"]
+size = Vector2(72, 95)
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_mdvog")
 
 [node name="Idle_anim" type="AnimatedSprite2D" parent="."]
@@ -92,9 +116,33 @@ frame_progress = 0.586386
 sprite_frames = SubResource("SpriteFrames_rtpku")
 frame_progress = 0.367852
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["player"]]
 shape = SubResource("CapsuleShape2D_dcbn6")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 editor_draw_limits = true
 script = ExtResource("3_i8mry")
+
+[node name="right_fireball_marker" type="Marker2D" parent="."]
+position = Vector2(26, 0)
+
+[node name="left_fireball_marker" type="Marker2D" parent="."]
+position = Vector2(-26, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1g3tc")
+}
+
+[node name="Fireball_Timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.7
+
+[node name="Dialog_Interaction_Area" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dialog_Interaction_Area"]
+shape = SubResource("RectangleShape2D_4s41e")
+
+[connection signal="timeout" from="Fireball_Timer" to="." method="_on_fireball_timer_timeout"]
