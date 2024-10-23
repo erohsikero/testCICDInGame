@@ -30,6 +30,15 @@ const DEFAULT_JUMP_DURATION = 0.3
 const CAST_FIREBALL_SPEED = 700
 const ATTACK_DELAY = 0.7
 
+#Reputation
+@export var reputation: int = 0:
+	get:
+		return reputation
+	set(value):
+		print("Setting reputation to: ", value)
+		reputation = value
+
+
 var _max_jump_height: float = DEFAULT_MAX_JUMP_HEIGHT
 ## The max jump height in pixels (holding jump).
 @export var max_jump_height: float = DEFAULT_MAX_JUMP_HEIGHT: 
@@ -132,6 +141,9 @@ var acc = Vector2()
 @onready var coyote_timer = Timer.new()
 @onready var jump_buffer_timer = Timer.new()
 
+@onready var idle : AnimatedSprite2D = $Idle_anim
+@onready var walk : AnimatedSprite2D = $Walk_anim
+var walkLeft : bool = false
 
 func _init():
 	default_gravity = calculate_gravity(max_jump_height, jump_duration)
@@ -140,8 +152,10 @@ func _init():
 	release_gravity_multiplier = calculate_release_gravity_multiplier(
 			jump_velocity, min_jump_height, default_gravity)
 	
+
 func _ready():
-	
+	self.add_to_group("player")  # Add the character to the "player" group used for detecting object type when colliding with portal
+
 	if is_coyote_time_enabled:
 		add_child(coyote_timer)
 		coyote_timer.wait_time = coyote_time
@@ -151,38 +165,40 @@ func _ready():
 		add_child(jump_buffer_timer)
 		jump_buffer_timer.wait_time = jump_buffer
 		jump_buffer_timer.one_shot = true
-		
+
 	Dialogic.signal_event.connect(_on_dialogic_signal)
+
+	idle.play()
+	walk.play()
 
 
 func _input(_event):
-	
 	acc.x = 0
-	
+
 	if (!stop_inputs):
 	
 		if (Input.is_action_pressed(input_right) && Input.is_action_pressed(input_left)):
 			pass
-			
+
 		elif (Input.is_action_pressed(input_right) && !(animations.current_animation=="cast_fireball_right")):
 			acc.x = max_acceleration
 			direction = "right"
 			animations.play("move_right")
-			
+
 		elif (Input.is_action_pressed(input_left) && !(animations.current_animation=="cast_fireball_right")):
 			acc.x = -max_acceleration
 			direction = "left"
 			animations.play("move_left")
-		
+
 		if (Input.is_action_just_pressed(input_jump) && !(animations.current_animation=="cast_fireball_right")):
 			holding_jump = true
 			start_jump_buffer_timer()
 			if (not can_hold_jump and can_ground_jump()) or can_double_jump():
 				jump()
-			
+
 		if Input.is_action_just_released(input_jump):
 			holding_jump = false
-			
+
 		if Input.is_action_just_pressed(input_fireball):
 			if (is_on_floor()):
 				Cast_Fireball()
@@ -215,7 +231,8 @@ func _physics_process(delta):
 	velocity.x *= 1 / (1 + (delta * friction))
 	velocity += acc * delta
 	
-	
+	determine_animation(velocity)
+
 	_was_on_ground = is_feet_on_ground()
 	move_and_slide()
 
@@ -356,27 +373,42 @@ func calculate_friction(time_to_max):
 ## Formula from [url]https://www.reddit.com/r/gamedev/comments/bdbery/comment/ekxw9g4/?utm_source=share&utm_medium=web2x&context=3[/url]
 func calculate_speed(p_max_speed, p_friction):
 	return (p_max_speed / p_friction) - p_max_speed
-	
-	
+
+var velThresh : int = 30
+
+func determine_animation(velocity):
+	idle.visible = false
+	walk.visible = false
+	# Checks if velocity is below threshhold
+	if (-velThresh <= velocity.x and velocity.x <= velThresh):
+		idle.visible = true
+	elif (velocity.x > velThresh):
+		walkLeft = false
+		walk.visible = true
+	elif (velocity.x < -velThresh):
+		walkLeft = true
+		walk.visible = true
+	walk.flip_h = walkLeft
+
 func Set_Clamp(Max_X, Max_Y):
 	var Camera_Instance = $Camera2D
 	
 	Camera_Instance.Set_Clamp(Max_X, Max_Y)
 	pass
-	
+
 func Cast_Fireball():
-	
+
 	$Fireball_Timer.start()
-	
+
 	if (direction=="right"):
 		animations.play("cast_fireball_right")
 		acc.x=0
 	else:
 		animations.play("cast_fireball_right")
 		acc.x=0
-	
+
 func Create_Fireball():
-	
+
 	var Fireball = fireball.instantiate()
 	if (direction=="right"):
 		Fireball.position = $right_fireball_marker.global_position
@@ -390,18 +422,16 @@ func Create_Fireball():
 func _on_fireball_timer_timeout():
 	$Fireball_Timer.stop()
 	Create_Fireball()
-	
+
 func _on_dialogic_signal(argument: String):
-	
+
 	if (argument=="start_dialog"):
 		stop_inputs=true
 	elif (argument=="end_dialog"):
 		stop_inputs=false
-	
+
 	## Arguments for losing/gaining reputation
 	elif (argument=="bad"):
 		pass
 	elif (argument=="good"):
 		pass
-		
-		
