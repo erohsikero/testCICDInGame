@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: barichello/godot-ci:4.3
+      image: barichello/godot-ci:4.2.2
 
     steps:
 
@@ -33,16 +33,17 @@ jobs:
       - name: Move HTML5 templates into position
         run: |
           ls -a /root/.local/share/godot/
-          wget https://github.com/godotengine/godot-builds/releases/download/4.3-stable/Godot_v4.3-stable_export_templates.tpz
-          unzip Godot_v4.3-stable_export_templates.tpz
-          ls -a
+          # wget https://github.com/godotengine/godot-builds/releases/download/4.3-stable/Godot_v4.3-stable_export_templates.tpz
+          # unzip Godot_v4.3-stable_export_templates.tpz
+          # ls -a
           mkdir -v -p ~/.local/share/godot/templates
-          mv ./templates ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+          # mv ~/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
       - name: Create staging directory
         run: mkdir -v -p build/web
 
       - name: Build
-        run: godot --headless -v --export "HTML5" ../build/web/index.html project/project.godot
+        run: godot -v --export "HTML5" ../build/web/index.html project/project.godot
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
