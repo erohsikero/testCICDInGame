@@ -10,7 +10,7 @@
 name: 'Publish to GitHub Pages'
 
 env:
-  GODOT_VERSION: 3.2.2 # Remember to manually set image to this version below.
+  GODOT_VERSION: 3.5 # Remember to manually set image to this version below.
 
 on:
   workflow_dispatch:
@@ -23,15 +23,9 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: barichello/godot-ci:3.2.2
+      image: barichello/godot-ci:3.5
 
     steps:
-      - name: Check NVM Version
-        run: |
-          node -v || node --version
-          nvm install 16.20.0
-          nvm use 16.20.0
-          node -v
 
       - name: Checkout
         uses: actions/checkout@v2
