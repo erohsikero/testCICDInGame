@@ -26,6 +26,13 @@ jobs:
       image: barichello/godot-ci:3.2.2
 
     steps:
+      - name: Check NVM Version
+        run: |
+          node -v || node --version
+          nvm install 16.20.0
+          nvm use 16.20.0
+          node -v
+
       - name: Checkout
         uses: actions/checkout@v2
 
