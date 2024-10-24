@@ -9,8 +9,8 @@
 
 name: 'Publish to GitHub Pages'
 
-# env:
-#   GODOT_VERSION: 4.2.2 # Remember to manually set image to this version below.
+env:
+  GODOT_VERSION: 3.6 # Remember to manually set image to this version below.
 
 on:
   workflow_dispatch:
