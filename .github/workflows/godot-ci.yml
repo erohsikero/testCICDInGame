@@ -35,7 +35,7 @@ jobs:
           ls -a /root/.local/share/godot/
           # wget https://github.com/godotengine/godot-builds/releases/download/4.3-stable/Godot_v4.3-stable_export_templates.tpz
           # unzip Godot_v4.3-stable_export_templates.tpz
-          ls -a ./export_templates
+          ls -a /root/.local/share/godot/export_templates
           mkdir -v -p ~/.local/share/godot/export_templates
           mv ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
           # mv ~/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
